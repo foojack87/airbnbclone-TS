@@ -14,9 +14,23 @@ export default async function getCurrentUser() {
       return null;
     }
 
+    // Omit hashed password from getting current user.
     const currentUser = await prisma.user.findUnique({
       where: {
         email: session.user.email as string,
+      },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        emailVerified: true,
+        image: true,
+        createdAt: true,
+        updatedAt: true,
+        favoriteIds: true,
+        accounts: true,
+        listings: true,
+        reservations: true,
       },
     });
 

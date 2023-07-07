@@ -16,7 +16,6 @@ import useRegisterModal from '@/app/hooks/useRegisterModal';
 
 const LoginModal = () => {
   const router = useRouter();
-  const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
   const [isLoading, setIsLoading] = useState(false);
 
