@@ -21,6 +21,16 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
     setIsOpen((value) => !value);
   }, []);
 
+  const handleSignUpToggle = useCallback(() => {
+    setIsOpen((value) => !value);
+    registerModal.onOpen();
+  }, []);
+
+  const handleLoginToggle = useCallback(() => {
+    setIsOpen((value) => !value);
+    loginModal.onOpen();
+  }, []);
+
   return (
     <div className="relative">
       <div className="flex flex-row items-center gap-3">
@@ -54,8 +64,8 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
               </>
             ) : (
               <>
-                <MenuItem onClick={loginModal.onOpen} label="Login" />
-                <MenuItem onClick={registerModal.onOpen} label="Sign up" />
+                <MenuItem onClick={handleLoginToggle} label="Login" />
+                <MenuItem onClick={handleSignUpToggle} label="Sign up" />
               </>
             )}
           </div>
