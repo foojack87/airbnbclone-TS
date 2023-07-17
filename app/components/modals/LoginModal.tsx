@@ -30,15 +30,18 @@ const LoginModal = () => {
     },
   });
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     setIsLoading(true);
-    signIn('credentials', {
-      ...data,
-      redirect: false,
-    }).then((callback) => {
+
+    try {
+      const callback = await signIn('credentials', {
+        ...data,
+        redirect: false,
+      });
       setIsLoading(false);
 
-      if (callback?.ok) {
+      if (callback?.ok && callback?.error === null) {
+        console.log(callback);
         toast.success('Logged in');
         router.refresh();
         loginModal.onClose();
@@ -46,7 +49,10 @@ const LoginModal = () => {
       if (callback?.error) {
         toast.error(callback.error);
       }
-    });
+    } catch (error: any) {
+      setIsLoading(false);
+      toast.error(error.message || 'An error occurred during login');
+    }
   };
 
   const bodyContent = (

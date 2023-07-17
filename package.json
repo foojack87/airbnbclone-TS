@@ -39,5 +39,8 @@
     "prisma": "^4.16.2",
     "tailwindcss": "^3.3.2",
     "typescript": "^5.1.6"
+  },
+  "overrides": {
+    "semver": "^7.5.3"
   }
 }
